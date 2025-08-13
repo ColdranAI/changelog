@@ -1,4 +1,4 @@
-import { computed } from "vue";
+import { onMounted, onBeforeUnmount } from "vue";
 
 /**
  *
@@ -45,10 +45,16 @@ export async function useClickOutside(
   };
 
   onMounted(() => {
-    window.addEventListener("click", listener);
+    // Only add event listeners on client side
+    if (process.client && typeof window !== 'undefined') {
+      window.addEventListener("click", listener);
+    }
   });
   onBeforeUnmount(() => {
-    window.removeEventListener("click", listener);
+    // Only remove event listeners on client side
+    if (process.client && typeof window !== 'undefined') {
+      window.removeEventListener("click", listener);
+    }
   });
   return {
     listener,

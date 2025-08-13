@@ -1,5 +1,6 @@
-export default ({
-    modules: ['@nuxtjs/tailwindcss', '@nuxt/content', 'nuxt-icon'],
+// https://nuxt.com/docs/api/configuration/nuxt-config
+export default defineNuxtConfig({
+    modules: ['@nuxtjs/tailwindcss', '@nuxt/content', '@nuxt/icon'],
     content: {
         highlight: {
             theme: 'nord',
