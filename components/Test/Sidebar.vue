@@ -84,7 +84,10 @@ const iframeLoaded = ref(false);
 function close() {
   show.value = false;
   setTimeout(() => {
-    document.body.style.removeProperty("overflow");
+    // Only manipulate DOM on client side
+    if (process.client && typeof document !== 'undefined') {
+      document.body.style.removeProperty("overflow");
+    }
     emit("close");
   }, 500);
 }
@@ -92,6 +95,9 @@ const slideOver = ref(null);
 useClickOutside(slideOver, () => close());
 onMounted(() => {
   show.value = true;
-  document.body.style.setProperty("overflow", "hidden");
+  // Only manipulate DOM on client side
+  if (process.client && typeof document !== 'undefined') {
+    document.body.style.setProperty("overflow", "hidden");
+  }
 });
 </script>
